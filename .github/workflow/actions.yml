@@ -1,19 +1,17 @@
-name: github-actions-demo
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-  
+name: Super-Linter
+
+on: push
+
 jobs:
-  job1:
+  super-lint:
+    name: Lint code base
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      # - run: sudo apt install python 
-      - run: echo ${{github.run_number}}
-      # - run: echo "$github.run_number"
-      - run: python main.py
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
         env:
-            first_name : ${{secrets.FNAME}}
-            last_name : ${{secrets.LNAME}}
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
