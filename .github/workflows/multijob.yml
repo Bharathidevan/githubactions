@@ -10,7 +10,7 @@ on:
         description: "Run job 3"
         required: true
         type: boolean
-      name:
+      job-2-name:
         
         description: "Person to greet"
         default: "World"
