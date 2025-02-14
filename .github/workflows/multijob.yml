@@ -1,4 +1,3 @@
-
 # Display name of workflow
 name: Multi Jobs
 
@@ -11,6 +10,25 @@ on:
         description: "Run job 3"
         required: true
         type: boolean
+      name:
+        
+        description: "Person to greet"
+        default: "World"
+        required: true
+        type: string
+      city:
+        description: "Favorite city"
+        required: true
+        default: "China"
+        type: choice
+        options:
+          - chennai
+          - mumbai
+          - coimbatore
+      fav-color-blue:
+        description: "Are you Member of Hepl"
+        required: true
+        type: boolean    
 
 jobs:
   job-1:
@@ -26,8 +44,11 @@ jobs:
     needs:
       - job-1
     steps:
-      - name: Output for Job 2
-        run: echo "Hello from Job 2"
+      - name: Send greeting
+        run: |
+          echo "Hello ${{ github.event.inputs.name }}" 
+          echo "Your favorite city is ${{ github.event.inputs.city }}"
+          echo "Are you Member of Hepl: ${{ github.event.inputs.fav-color-blue }}"
       #- name: Make Job 2 Fail
         #run: exit 1
 
@@ -51,3 +72,5 @@ jobs:
     steps:
       - name: Output for Job 4
         run: echo "Hello from Job 4"
+
+
